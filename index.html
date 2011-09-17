@@ -540,7 +540,9 @@
         $('#sorted tbody tr').each(function iter(i) {
           var questions = toQuestions($(this).children('.questions').html());
           var sum = _(questions).reduce(function add(a, e) {
-            return a + $("select #" + e).val();
+            var n = a + $("select#" + e).val();
+            console.log(n);
+            return n;
           }, 0);
           $(this).children('.value').html(sum / questions.length);
         });
@@ -550,7 +552,6 @@
         $("table#sorted").tablesorter();
         // Set up the click event
         $("form").submit(function exec() {
-          console.log("hey");
           calculate();
           return false;      
         });
