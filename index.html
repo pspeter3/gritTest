@@ -530,7 +530,17 @@
     <script type="text/javascript">
       // Converts a string into an underscore array of ids
       function toQuestions(str) {
-        return str.split(/\w*,/);
+        return _(str.split(',')).map(function trim(id) {
+          return id.replace(' ', '');
+        });
+      }
+      // Calculates the values
+      function calculate() {
+        // Iterate through the values
+        $('#sorted tbody tr').each(function iter(index) {
+          var questions = toQuestions($(this).children('.questions').html());
+          console.log(questions);
+        });
       }
       $(function gritTest() {
         // Set up the table sorter
