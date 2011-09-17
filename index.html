@@ -489,9 +489,9 @@
           <table class="zebra-striped" id="sorted">
             <thead>
               <tr>
-                <th>Attribute</th>
-                <th>Questions</th>
-                <th>Value</th>
+                <th class="header yellow">Attribute</th>
+                <th class="header blue">Questions</th>
+                <th class="header green">Value</th>
               </tr>
             </thead>
             <tbody>
@@ -535,11 +535,7 @@
         });
       }
       $(function gritTest() {
-        $("table#sorted").tablesorter({
-          headers: {
-            1: {sorter: false}
-          }
-        });
+        $("table#sorted").tablesorter();
       });
     </script>
   </body>
