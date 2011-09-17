@@ -486,7 +486,7 @@
       <div class="row">
         <div class="span16">
           <h2>Results</h2>
-          <table class="zebra-striped">
+          <table class="zebra-striped" id="sorted">
             <thead>
               <tr>
                 <th>Attribute</th>
@@ -528,9 +528,18 @@
     <script type="text/javascript" src="js/jquery.tablesorter.js"></script>
     <script type="text/javascript" src="js/underscore.js"></script>
     <script type="text/javascript">
-      
-      $(document).ready(function gritTest(){
-        console.log("hello world!!!");
+      // Converts a string into an underscore array of ids
+      function toQuestions(str) {
+        return _(str.split(',')).map(function trim(id) {
+          return id.replace(/\w+/g, '');
+        });
+      }
+      $(function gritTest() {
+        $("table#sorted").tablesorter({
+          headers: {
+            1: {sorter: false}
+          }
+        });
       });
     </script>
   </body>
