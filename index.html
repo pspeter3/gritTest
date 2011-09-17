@@ -478,8 +478,8 @@
                   </select>
                 </div>
               </div>
-            <button class="btn primary">Calculate</button>
             </fieldset>
+            <button class="btn primary">Calculate</button>
           </form>
         </div>
       </div>
@@ -550,6 +550,7 @@
         $("table#sorted").tablesorter();
         // Set up the click event
         $("button").click(function exec() {
+          console.log("hey");
           calculate();        
         });
       });
