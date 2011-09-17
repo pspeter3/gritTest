@@ -537,16 +537,21 @@
       // Calculates the values
       function calculate() {
         // Iterate through the values
-        $('#sorted tbody tr').each(function iter(index) {
+        $('#sorted tbody tr').each(function iter(i) {
           var questions = toQuestions($(this).children('.questions').html());
-          console.log(questions);
+          var sum = _(questions).reduce(function add(a, e) {
+            return a + $("select #" + e).val();
+          }, 0);
+          $(this).children('.value').html(sum / questions.length);
         });
       }
       $(function gritTest() {
         // Set up the table sorter
         $("table#sorted").tablesorter();
         // Set up the click event
-        
+        $("button").click(function exec() {
+          calculate();        
+        });
       });
     </script>
   </body>
