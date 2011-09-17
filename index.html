@@ -549,9 +549,10 @@
         // Set up the table sorter
         $("table#sorted").tablesorter();
         // Set up the click event
-        $("button").click(function exec() {
+        $("form").submit(function exec() {
           console.log("hey");
-          calculate();        
+          calculate();
+          return false;      
         });
       });
     </script>
