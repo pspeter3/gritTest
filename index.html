@@ -540,9 +540,7 @@
         $('#sorted tbody tr').each(function iter(i) {
           var questions = toQuestions($(this).children('.questions').html());
           var sum = _(questions).reduce(function add(a, e) {
-            var n = a + parseInt($("select#" + e).val());
-            console.log(n);
-            return n;
+            return a + parseInt($("select#" + e).val());
           }, 0);
           $(this).children('.value').html(sum / questions.length);
         });
