@@ -21,13 +21,26 @@
     <div class="container">
       <div class="row">
         <div class="span16">
-          <h1>Grit Scale</h1>
+          <h1>Grit Scale <small>pspeter3</small></h1>
         </div>
       </div>
       <div class="row">
         <div class="span16">
-          <h2>Test</h2>
-          <form action="">
+          <h2 class="page-header">Information</h2>
+          <p>The inspiration for this test comes from the New York Times article
+          <a href="http://nyti.ms/nLBqp4">What if the Secret to Success Is Failure?</a>
+          and the test supplied by <a href="http://www.sas.upenn.edu/~duckwort/images/17-item%20Grit%20and%20Ambition.040709.pdf">
+          http://www.sas.upenn.edu/~duckwort/images/17-item%20Grit%20and%20Ambition.040709.pdf</a>.
+          In order to take the test, answer all of the questions to the best of your ability and then
+          click calculate. The webpage will automatically calculate all of the scores and display them
+          in the table below the form.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span16">
+          <h2 class="page-header">Test</h2>
+          <form>
             <fieldset>
               <legend>
                 Directions for taking the Grit Scale: Please respond to 
@@ -478,20 +491,20 @@
                   </select>
                 </div>
               </div>
-            <button class="btn primary">Calculate</button>
             </fieldset>
+            <button class="btn primary">Calculate</button>
           </form>
         </div>
       </div>
       <div class="row">
         <div class="span16">
-          <h2>Results</h2>
-          <table class="zebra-striped">
+          <h2 class="page-header">Results</h2>
+          <table class="zebra-striped" id="sorted">
             <thead>
               <tr>
-                <th>Attribute</th>
-                <th>Questions</th>
-                <th>Value</th>
+                <th class="header blue">Attribute</th>
+                <th class="header blue">Questions</th>
+                <th class="header blue">Value</th>
               </tr>
             </thead>
             <tbody>
@@ -524,5 +537,36 @@
           </table>
         </div>
     </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript">
+      // Converts a string into an underscore array of ids
+      function toQuestions(str) {
+        return _(str.split(',')).map(function trim(id) {
+          return id.replace(' ', '');
+        });
+      }
+      // Calculates the values
+      function calculate() {
+        // Iterate through the values
+        $('#sorted tbody tr').each(function iter(i) {
+          var questions = toQuestions($(this).children('.questions').html());
+          var sum = _(questions).reduce(function add(a, e) {
+            return a + parseInt($("select#" + e).val());
+          }, 0);
+          $(this).children('.value').html(sum / questions.length);
+        });
+      }
+      $(function gritTest() {
+        // Set up the table sorter
+        $("table#sorted").tablesorter();
+        // Set up the click event
+        $("form").submit(function exec() {
+          calculate();
+          return false;      
+        });
+      });
+    </script>
   </body>
 </html>
